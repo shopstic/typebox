@@ -72,7 +72,7 @@ export interface CustomOptions {
   title?: string;
   description?: string;
   default?: any;
-  examples?: any;
+  examples?: any[];
   [prop: string]: any;
 }
 
@@ -474,6 +474,10 @@ export class TypeBuilder {
           additionalProperties,
           properties,
         };
+  }
+
+  public PartialObject<T extends TProperties>(properties: T): TObject<T> {
+    return Type.Object<T>(properties, { additionalProperties: true });
   }
 
   /** `STANDARD` Creates a `{ [key: string]: T }` schema. */
